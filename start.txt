@@ -1,0 +1,3 @@
+Set-Location "d:\flutter_p\newly"
+node ".\assets\js\server.js"
+

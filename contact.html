@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>اتصل بنا — العـودة</title>
+  <meta name="description" content="تواصل مع شركة العـودة لاستيراد الأثاث. نموذج اتصال وخرائط جوجل وأرقام التواصل." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/rtl.css" />
+  <link rel="stylesheet" href="/assets/css/location.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand"><span data-i18n="brand">العـودة</span> <small>Alaouda</small></div>
+      <nav class="nav" aria-label="التنقل الرئيسي">
+        <a href="/" data-i18n="nav_home">الرئيسية</a>
+        <a href="/about.html" data-i18n="nav_about">من نحن</a>
+        <a href="/products.html" data-i18n="nav_products">المنتجات</a>
+        <a href="/store.html" data-i18n="nav_store">المتجر</a>
+        <a href="/contact.html" data-i18n="nav_contact">اتصل بنا</a>
+      </nav>
+      <button class="mobile-nav-toggle" aria-controls="mobile-menu" aria-expanded="false">☰</button>
+      <div class="lang-switch" role="group" aria-label="تغيير اللغة">
+        <button data-lang="ar">العربية</button>
+        <button data-lang="en">English</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-drawer">
+      <a href="/" data-i18n="nav_home">الرئيسية</a>
+      <a href="/about.html" data-i18n="nav_about">من نحن</a>
+      <a href="/products.html" data-i18n="nav_products">المنتجات</a>
+      <a href="/store.html" data-i18n="nav_store">المتجر</a>
+      <a href="/contact.html" data-i18n="nav_contact">اتصل بنا</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="section" data-animate>
+      <h1 class="section-title" data-i18n="contact_title">تواصل معنا</h1>
+      <div id="nurui-contact-root"></div>
+      <div class="card" style="padding: 16px; margin-top: 24px; max-width: 400px;">
+        <p><strong>الهاتف:</strong> +218 000 000 000</p>
+        <p><strong>البريد:</strong> info@alaouda.ly</p>
+        <p><strong data-i18n="business_hours">ساعات العمل</strong>: 9:00 — 18:00</p>
+      </div>
+    </section>
+  </main>
+
+  <button class="whatsapp-fab" aria-label="تواصل عبر واتساب">واتساب</button>
+
+  <div id="react-footer"></div>
+
+  <!-- React + ReactDOM + Babel (for JSX in browser) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Babel for in-browser JSX transform -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Footer component (JSX transpiled by Babel) -->
+  <script type="text/babel" data-presets="react" src="/assets/js/footer-react.jsx"></script>
+
+  <!-- NurUI ContactForm React entry -->
+  <script type="module" src="/assets/js/contact-react-entry.jsx"></script>
+
+  <script type="module">
+    import './assets/js/main.js';
+
+    // Pre-fill product reference from query string
+    const params = new URLSearchParams(location.search);
+    const productRef = params.get('product');
+    if (productRef) document.getElementById('productRef').value = productRef;
+
+    const statusEl = document.getElementById('status');
+
+    function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function validatePhone(v){ return /^[0-9+\-\s]{6,}$/.test(v); }
+
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusEl.textContent = '';
+      const data = Object.fromEntries(new FormData(form));
+      if (data.honeypot) return; // spam
+      if (!data.name || !data.message || !validateEmail(data.email) || !validatePhone(data.phone)) {
+        statusEl.textContent = document.documentElement.lang==='ar' ? 'يرجى التحقق من الحقول' : 'Please check the fields';
+        statusEl.style.color = 'crimson';
+        return;
+      }
+      // Simulate API request
+      try {
+        await new Promise(r => setTimeout(r, 700));
+        statusEl.textContent = document.documentElement.lang==='ar' ? 'تم إرسال رسالتك بنجاح.' : 'Your message has been sent successfully.';
+        statusEl.style.color = 'green';
+        form.reset();
+      } catch (e) {
+        statusEl.textContent = document.documentElement.lang==='ar' ? 'حدث خطأ، حاول مجددًا.' : 'An error occurred, please try again.';
+        statusEl.style.color = 'crimson';
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

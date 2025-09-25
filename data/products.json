@@ -1,0 +1,35 @@
+[
+  {
+    "id": "office-desk-a1",
+    "name_en": "Office Desk A1",
+    "name_ar": "مكتب مكتبي A1",
+    "category": "office",
+    "style": "modern",
+    "desc_en": "Sturdy modern office desk with cable management.",
+    "desc_ar": "مكتب مكتبي عصري متين مع إدارة للكابلات.",
+    "specs": {"material": "Wood + Metal", "color": "Walnut/Brown"},
+    "images": ["https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop"]
+  },
+  {
+    "id": "home-sofa-b2",
+    "name_en": "Home Sofa B2",
+    "name_ar": "كنبة منزلية B2",
+    "category": "home",
+    "style": "classic",
+    "desc_en": "Comfortable 3-seater sofa with washable covers.",
+    "desc_ar": "كنبة مريحة بثلاثة مقاعد مع أغطية قابلة للغسل.",
+    "specs": {"material": "Fabric", "color": "Beige"},
+    "images": ["https://images.unsplash.com/photo-1484101403633-562f891dc89a?q=80&w=1200&auto=format&fit=crop"]
+  },
+  {
+    "id": "office-chair-c3",
+    "name_en": "Ergonomic Office Chair C3",
+    "name_ar": "كرسي مكتبي مريح C3",
+    "category": "office",
+    "style": "modern",
+    "desc_en": "Ergonomic chair with lumbar support and adjustable height.",
+    "desc_ar": "كرسي مريح بدعم أسفل الظهر وارتفاع قابل للتعديل.",
+    "specs": {"material": "Mesh + Metal", "color": "Black"},
+    "images": ["https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1200&auto=format&fit=crop"]
+  }
+]

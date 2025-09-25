@@ -1,0 +1,4 @@
+/* RTL-specific overrides (Arabic default) */
+/* Using logical properties in main CSS; keep this minimal */
+[dir="rtl"] .brand { flex-direction: row-reverse; }
+[dir="rtl"] .nav a { text-align: right; }

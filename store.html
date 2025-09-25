@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>المتجر — العـودة</title>
+  <meta name="description" content="المتجر — شراء عبر الإنترنت قريباً." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/rtl.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand"><span data-i18n="brand">العـودة</span> <small>Alaouda</small></div>
+      <nav class="nav" aria-label="التنقل الرئيسي">
+        <a href="/#home" data-i18n="nav_home">الرئيسية</a>
+        <a href="/#about" data-i18n="nav_about">من نحن</a>
+        <a href="/#products" data-i18n="nav_products">المنتجات</a>
+        <a href="/store.html" data-i18n="nav_store">المتجر</a>
+        <a href="/#contact" data-i18n="nav_contact">اتصل بنا</a>
+      </nav>
+      <button class="mobile-nav-toggle" aria-controls="mobile-menu" aria-expanded="false">☰</button>
+      <div class="lang-switch" role="group" aria-label="تغيير اللغة">
+        <button data-lang="ar">العربية</button>
+        <button data-lang="en">English</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-drawer">
+      <a href="/#home" data-i18n="nav_home">الرئيسية</a>
+      <a href="/#about" data-i18n="nav_about">من نحن</a>
+      <a href="/#products" data-i18n="nav_products">المنتجات</a>
+      <a href="/store.html" data-i18n="nav_store">المتجر</a>
+      <a href="/#contact" data-i18n="nav_contact">اتصل بنا</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="section" data-animate>
+      <h1 class="section-title" data-i18n="nav_store">المتجر</h1>
+      <p data-i18n="coming_soon">الشراء عبر الإنترنت قريباً</p>
+    </section>
+
+    <section class="section" data-animate>
+      <h2 class="section-title">منتجات رائجة</h2>
+      <div class="grid cards" id="popular"></div>
+    </section>
+  </main>
+
+  <button class="whatsapp-fab" aria-label="تواصل عبر واتساب">واتساب</button>
+
+  <div id="react-footer"></div>
+
+  <!-- React + ReactDOM + Babel (for JSX in browser) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Babel for in-browser JSX transform -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Footer component (JSX transpiled by Babel) -->
+  <script type="text/babel" data-presets="react" src="/assets/js/footer-react.jsx"></script>
+
+  <script type="module">
+    import './assets/js/main.js';
+    const list = document.getElementById('popular');
+    const products = await fetch('/data/products.json').then(r=>r.json());
+    list.innerHTML = products.map(p => `
+      <article class="card">
+        <img src="${p.images[0]}" alt="${document.documentElement.lang==='ar'?p.name_ar:p.name_en}" loading="lazy" style="aspect-ratio: 4/3; object-fit: cover;" />
+        <div class="card-body">
+          <h3>${document.documentElement.lang==='ar'?p.name_ar:p.name_en}</h3>
+          <a class="btn btn-secondary" href="/#contact?product=${encodeURIComponent(p.id)}">اطلب عرض سعر</a>
+        </div>
+      </article>`).join('');
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
